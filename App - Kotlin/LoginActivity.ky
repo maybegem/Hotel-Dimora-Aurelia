@@ -1,0 +1,111 @@
+package com.example.albergo
+
+import android.content.Intent
+import android.content.SharedPreferences
+import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.albergo.API.ApiService
+import com.example.albergo.API.RetrofitClient
+import com.example.albergo.API.LoginRequest
+import com.example.albergo.API.LoginResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+class LoginActivity : AppCompatActivity() {
+
+    private lateinit var sharedPref: SharedPreferences
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
+
+        // Inizializza le SharedPreferences
+        sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE)
+
+        val emailField = findViewById<EditText>(R.id.etEmail)
+        val passwordField = findViewById<EditText>(R.id.etPassword)
+        val loginButton = findViewById<Button>(R.id.btnLogin)
+        val registerButton = findViewById<Button>(R.id.btnRegister)
+
+        // Controlla se l'utente è già autenticato
+        checkLoginStatus()
+
+        loginButton.setOnClickListener {
+            val email = emailField.text.toString().trim()
+            val password = passwordField.text.toString().trim()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Per favore, inserisci email e password", Toast.LENGTH_SHORT).show()
+            } else {
+                performLogin(email, password)
+            }
+        }
+
+        registerButton.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun checkLoginStatus() {
+        val userId = sharedPref.getInt("USER_ID", -1)
+        if (userId != -1) {
+            // L'utente è già autenticato, procedi alla Dashboard
+            navigateToDashboard()
+        }
+    }
+
+    private fun performLogin(email: String, password: String) {
+        val api = RetrofitClient.instance.create(ApiService::class.java)
+        val request = LoginRequest(email, password)
+
+        api.login(request).enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (response.isSuccessful && response.body()?.success == true) {
+                    val user = response.body()?.user
+
+                    if (user != null) {
+                        // Salva le informazioni dell'utente nelle SharedPreferences
+                        saveUserToPreferences(user.id, user.email, user.nome, user.cognome)
+
+                        // Naviga alla Dashboard
+                        navigateToDashboard()
+                    } else {
+                        Log.d("LoginActivity", "Errore: il campo 'user' è null.")
+                        Toast.makeText(this@LoginActivity, "Errore: utente non trovato.", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Log.d("LoginActivity", "Login fallito: ${response.errorBody()?.string()}")
+                    Toast.makeText(this@LoginActivity, "Credenziali non valide.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                Log.d("LoginActivity", "Errore di connessione: ${t.message}")
+                Toast.makeText(this@LoginActivity, "Errore di connessione: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun saveUserToPreferences(userId: Int, email: String, nome: String?, cognome: String?) {
+        Log.d("LoginActivity", "Salvataggio ID utente: $userId")
+        sharedPref.edit()
+            .putInt("USER_ID", userId)
+            .putString("EMAIL", email)
+            .putString("NOME", nome)
+            .putString("COGNOME", cognome)
+            .putBoolean("isLoggedIn", true)
+            .apply()
+    }
+
+    private fun navigateToDashboard() {
+        val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+}
