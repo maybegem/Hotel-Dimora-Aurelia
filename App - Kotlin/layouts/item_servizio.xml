@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ServiziExtraActivity">
+
+    <!-- Immagine del servizio -->
+
+    <ImageView
+        android:id="@+id/imageViewServizio"
+        android:layout_width="385dp"
+        android:layout_height="284dp"
+        android:layout_marginTop="48dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/errore_connessione"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Descrizione del servizio -->
+    <TextView
+        android:id="@+id/textViewDescrizioneServizio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Errore di connessione. Riprovare."
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/imageViewServizio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Bottone per prenotare -->
+    <Button
+        android:id="@+id/btnPrenotaServizio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Prenota"
+        app:layout_constraintTop_toBottomOf="@id/textViewDescrizioneServizio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
