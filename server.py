@@ -13,8 +13,8 @@ def get_db_connection():
         host="localhost",
         port=3306,
         user='root',
-        password='gemma2002',
-        database='albergo',
+        password='',
+        database='',
         cursorclass=pymysql.cursors.DictCursor  # Restituisce i risultati come dizionari
     )
 
@@ -403,6 +403,7 @@ def crea_prenotazione_servizio():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
 
