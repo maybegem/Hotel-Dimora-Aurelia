@@ -32,7 +32,7 @@ CREATE TABLE Prenotazioni (prenotazioni
     adulti INT NOT NULL,                -- Numero di adulti
     bambini INT NOT NULL,               -- Numero di bambini
     colazione ENUM('SI', 'NO') NOT NULL,-- Colazione inclusa
-    status VARCHAR(50) DEFAULT 'Attiva', -- Stato della prenotazione
+    status VARCHAR(50) DEFAULT 'Attiva',-- Stato della prenotazione
     FOREIGN KEY (user_id) REFERENCES Utenti(id) ON DELETE CASCADE
 );
 
