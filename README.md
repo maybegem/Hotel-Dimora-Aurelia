@@ -7,7 +7,9 @@
   <div style="flex: 1; min-width: 250px;">
     <h1>🏩 Room Booking</h1>
     <p>
-      The Dashboard offers a smooth and intuitive room-booking flow: select the available options, confirm the booking, and view the result under “Reservations”.
+      The Dashboard offers a smooth and intuitive room-booking flow: 
+select the available options, confirm the booking, 
+and view the result under “Reservations”.
     </p>
 
   </div>
