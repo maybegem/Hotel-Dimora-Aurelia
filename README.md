@@ -1,4 +1,3 @@
-🏩 Room Booking
 <table>
   <tr>
     <td width="50%" align="center" style="vertical-align: middle;">
@@ -12,7 +11,7 @@
       </video>
     </td>
     <td width="50%" style="vertical-align: middle; padding-left: 20px;">
-      <h3 style="font-size: 20px; margin: 0 0 10px 0;">🏩 Room Booking</h3>
+      <h1 style="font-size: 20px; margin: 0 0 10px 0;">🏩 Room Booking</h1>
       <p>
         The Dashboard offers a smooth and intuitive room-booking flow: select the available options, confirm the booking, and view the result under <strong>"Reservations"</strong>.
       </p>
@@ -20,7 +19,6 @@
   </tr>
 </table>
 
-🛎 Book a Service
 <table>
   <tr>
     <td width="50%" align="center" style="vertical-align: middle;">
@@ -34,9 +32,10 @@
       </video>
     </td>
     <td width="50%" style="vertical-align: middle; padding-left: 20px;">
-      <h3 style="font-size: 20px; margin: 0 0 10px 0;">🛎 Book a Service</h3>
+      <h1 style="font-size: 20px; margin: 0 0 10px 0;">🛎 Book a Service</h1>
       <p>
-        From the Dashboard, users can book various services such as <strong>lunch</strong>, <strong>dinner</strong>, <strong>massages</strong>, and <strong>guided tours</strong>, choosing among available options and viewing the scheduled reservations inside the <strong>"Reservations"</strong> section.
+        From the Dashboard, users can book various services such as <strong>lunch</strong>, <strong>dinner</strong>, <strong>massages</strong>, and <strong>guided tours</strong>, choosing among available options and viewing the scheduled reservations inside the <strong>"Reservations"</strong> section. The images and their descriptions are loaded from several JSON files located in another repository. 
+        I used this approach to simulate a potential connection to an interface for managing the hotel.
       </p>
     </td>
   </tr>
